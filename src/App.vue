@@ -117,15 +117,19 @@ export default {
   methods: {
     preview(index) {
       let options = {
-        index,
-        addCaptionHTMLFn(item, el) {
-          el.children[0].innerHTML = `${item.figure}<br /><small>Photo:'${item.author}'</small>`
-          return true
-        }
+        index
       }
-      let imgs = this.imgs.map(i => i.m.url)
+      let items = this.imgs.map(img => {
+        return {
+          ...img,
+          src: img.m.url,
+          w: 0,
+          h: 0,
+          title: `${img.figure}<br /><small>Photo:'${img.author}'</small>`
+        }
+      })
 
-      this.$refs.preview.preview(imgs, options)
+      this.$refs.preview.init(items, options)
     }
   }
 }

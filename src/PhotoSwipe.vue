@@ -63,28 +63,37 @@ import PhotoSwipe from 'photoswipe'
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default'
 
 export default {
+  name: 'TgPreview',
   methods: {
+    /**
+     * 传入一个图片地址组成的数组，以及要显示图片的index
+     */
     preview(imgs, index) {
       let items = imgs.map(i => {
-        return {
-          src: i,
+        let item = i
+        if (typeof i == 'string') {
+          item = {
+            src: i
+          }
+        }
+        return Object.assign({}, item, {
           w: 0,
           h: 0
-        }
+        })
       })
 
       this.init(items, index)
     },
 
-    init(items, options) {
+    init(items, index) {
       var pswpElement = this.$el
 
       // define options (if needed)
-      // var options = {
-      //   // optionName: 'option value'
-      //   // for example:
-      //   index // start at first slide
-      // }
+      var options = {
+        // optionName: 'option value'
+        // for example:
+        index // start at first slide
+      }
 
       // Initializes and opens PhotoSwipe
       var gallery = new PhotoSwipe(

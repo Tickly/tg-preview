@@ -2,12 +2,12 @@
   "name": "tg-preview",
   "version": "0.1.1",
   "scripts": {
-    "start": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name tg-preview ./src/index.js",
     "lint": "vue-cli-service lint",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "deploy": "bash deploy.sh"
   },
   "dependencies": {
     "photoswipe": "^4.1.3"

@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/tg-preview/',
   title: 'tg-preview',
   description: '方便使用的图片预览组件',
   themeConfig: {

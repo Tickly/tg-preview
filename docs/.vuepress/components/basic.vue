@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     preview (index) {
-      this.$refs.preview.preview(this.items, index);
+      this.$refs.preview.preview(this.items, index, {})
     }
   }
 }

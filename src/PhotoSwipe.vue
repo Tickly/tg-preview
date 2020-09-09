@@ -19,7 +19,6 @@
       <div class="pswp__ui pswp__ui--hidden">
         <div class="pswp__top-bar">
           <!--  Controls are self-explanatory. Order can be changed. -->
-
           <div class="pswp__counter"></div>
 
           <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
@@ -68,7 +67,7 @@ export default {
     /**
      * 传入一个图片地址组成的数组，以及要显示图片的index
      */
-    preview(imgs, index) {
+    preview (imgs, index, options) {
       let items = imgs.map(i => {
         let item = i
         if (typeof i == 'string') {
@@ -82,17 +81,15 @@ export default {
         })
       })
 
-      this.init(items, index)
+      this.init(items, index, options)
     },
 
-    init(items, index) {
+    init (items, index, options = {}) {
       var pswpElement = this.$el
 
-      // define options (if needed)
-      var options = {
-        // optionName: 'option value'
-        // for example:
-        index // start at first slide
+      let defaultOptions = {
+        history: false,
+        index,
       }
 
       // Initializes and opens PhotoSwipe
@@ -100,7 +97,10 @@ export default {
         pswpElement,
         PhotoSwipeUI_Default,
         items,
-        options
+        {
+          ...defaultOptions,
+          ...options,
+        }
       )
 
       // gallery.listen('beforeChange', () => {
@@ -108,13 +108,13 @@ export default {
       // });
 
       // 自动处理图片大小
-      gallery.listen('imageLoadComplete', function(index, item) {
+      gallery.listen('imageLoadComplete', function (index, item) {
         if (item.w > 0) {
           return
         }
 
         var img = new Image()
-        img.onload = function() {
+        img.onload = function () {
           item.w = img.naturalWidth
           item.h = img.naturalHeight
           gallery.invalidateCurrItems()
